@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { ApolloProvider } from '@apollo/client';
+import client from './apollo/client';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Blog from './pages/Blog';
+import { ROUTES } from './utils/constants';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(): JSX.Element {
+    return (
+        <ApolloProvider client={client}>
+            <Router>
+                <Route path={ROUTES.blog}>
+                    <Blog />
+                </Route>
+            </Router>
+        </ApolloProvider>
+    );
 }
 
 export default App;
