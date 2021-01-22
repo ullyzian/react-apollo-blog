@@ -1,19 +1,20 @@
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
+import { ROUTES } from '../../utils/constants';
 
 function Navigation(): JSX.Element {
     return (
         <>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="/">React + Apollo blog</Navbar.Brand>
+                <Navbar.Brand href={ROUTES.home}>React + Apollo blog</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="/blog">Blog</Nav.Link>
+                    <Nav.Link href={ROUTES.blog}>Blog</Nav.Link>
                 </Nav>
                 <Nav className="ml-auto">
-                    <Nav.Link href="/signin" className="btn">
+                    <Nav.Link href={ROUTES.signIn}>
                         <Button size="sm">Sign In</Button>
                     </Nav.Link>
-                    <Nav.Link href="/signup">
+                    <Nav.Link href={ROUTES.signUp}>
                         <Button size="sm">Sign Up</Button>
                     </Nav.Link>
                 </Nav>

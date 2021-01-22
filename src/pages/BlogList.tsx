@@ -4,7 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import PostsList from '../components/Blog/PostsList';
 import Sidebar from '../components/Blog/Sidebar';
 
-function Blog(): JSX.Element {
+function BlogList(): JSX.Element {
     return (
         <>
             <Navigation />
@@ -24,4 +24,4 @@ function Blog(): JSX.Element {
     );
 }
 
-export default Blog;
+export default BlogList;
