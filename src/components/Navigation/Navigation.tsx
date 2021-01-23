@@ -3,8 +3,13 @@ import { Button, Nav, Navbar } from 'react-bootstrap';
 import { ROUTES } from '../../utils/constants';
 import AuthContext from '../../contexts/AuthContext';
 
-function Navigation(): JSX.Element {
+const Navigation: React.FC = () => {
     const auth = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        auth.signOut();
+        auth.authenticate();
+    };
 
     return (
         <>
@@ -19,17 +24,9 @@ function Navigation(): JSX.Element {
                             <Nav.Item className="text-white my-auto">
                                 <div style={{ fontSize: 14 }}>Hello, {auth.user?.fullname}</div>
                             </Nav.Item>
-                            <Nav.Link href="#">
-                                <Button
-                                    onClick={() => {
-                                        auth.signOut();
-                                        auth.authenticate();
-                                    }}
-                                    size="sm"
-                                >
-                                    Sign out
-                                </Button>
-                            </Nav.Link>
+                            <Button className="ml-2" onClick={handleSignOut} size="sm">
+                                Sign out
+                            </Button>
                         </>
                     ) : (
                         <>
@@ -45,6 +42,6 @@ function Navigation(): JSX.Element {
             </Navbar>
         </>
     );
-}
+};
 
 export default Navigation;

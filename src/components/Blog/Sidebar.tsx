@@ -5,7 +5,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 
-function Sidebar() {
+const Sidebar: React.FC = () => {
     const [show, setShow] = useState(false);
     const auth = useContext(AuthContext);
     const history = useHistory();
@@ -29,6 +29,6 @@ function Sidebar() {
             <ListGroup.Item action>This one is a button</ListGroup.Item>
         </ListGroup>
     );
-}
+};
 
 export default Sidebar;

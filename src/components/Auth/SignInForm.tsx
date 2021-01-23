@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 import AuthContext from '../../contexts/AuthContext';
 
-function SignInForm(): JSX.Element {
+const SignInForm: React.FC = () => {
     const [auth] = useMutation(AUTH_SIGNIN);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -65,6 +65,6 @@ function SignInForm(): JSX.Element {
             ))}
         </Form>
     );
-}
+};
 
 export default SignInForm;

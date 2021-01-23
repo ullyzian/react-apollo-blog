@@ -4,7 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import PostsList from '../components/Blog/PostsList';
 import Sidebar from '../components/Blog/Sidebar';
 
-function BlogList(): JSX.Element {
+const BlogList: React.FC = () => {
     return (
         <>
             <Navigation />
@@ -22,6 +22,6 @@ function BlogList(): JSX.Element {
             </Container>
         </>
     );
-}
+};
 
 export default BlogList;

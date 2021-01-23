@@ -1,17 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const ADD_POST = gql`
-    mutation {
-        createPost(body: $body, title: $title) {
-            post {
-                id
-                body
-                title
-            }
-        }
-    }
-`;
-
 export const AUTH_SIGNIN = gql`
     mutation AuthSignIn($username: String!, $password: String!) {
         signInUser(password: $password, username: $username) {

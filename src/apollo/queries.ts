@@ -10,10 +10,9 @@ export const GET_POSTS = gql`
     }
 `;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const GET_POST = (id: number) => gql`
-    query {
-        detailPost(id: ${id}) {
+export const GET_POST = gql`
+    query GetPost($id: Int!) {
+        detailPost(id: $id) {
             id
             title
             body

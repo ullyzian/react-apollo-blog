@@ -6,15 +6,12 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_POST } from '../apollo/queries';
 
-function BlogPost(): JSX.Element {
+const BlogPost: React.FC = () => {
     const { id }: { id: string } = useParams();
-    const { loading, error, data } = useQuery(GET_POST(Number(id)));
-    if (loading) {
-        return <div>Loading</div>;
-    }
-    if (error) {
-        return <div>Error</div>;
-    }
+    const { loading, error, data } = useQuery(GET_POST, { variables: { id: Number(id) } });
+    if (loading) return <div>Loading</div>;
+    if (error) return <div>Error</div>;
+
     return (
         <>
             <Navigation />
@@ -38,6 +35,6 @@ function BlogPost(): JSX.Element {
             </Container>
         </>
     );
-}
+};
 
 export default BlogPost;

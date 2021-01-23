@@ -1,18 +1,13 @@
 import React from 'react';
-import { IUser } from '../hooks/useAuth';
+import { IAuth } from '../hooks/useAuth';
 
-const initial: {
-    authenticated: boolean;
-    user: IUser | null;
-    signOut(): void;
-    authenticate(): Promise<boolean> | undefined;
-} = {
+const initialValues: IAuth = {
     authenticated: false,
     user: null,
-    signOut: () => null,
+    signOut: () => undefined,
     authenticate: () => undefined,
 };
 
-const AuthContext = React.createContext(initial);
+const AuthContext = React.createContext(initialValues);
 
 export default AuthContext;

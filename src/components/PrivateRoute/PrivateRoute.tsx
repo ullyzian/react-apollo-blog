@@ -7,9 +7,8 @@ interface PrivateRouteProps {
     children: React.ReactChildren;
 }
 
-function PrivateRoute({ children, ...rest }: PrivateRouteProps) {
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, ...rest }) => {
     const auth = useContext(AuthContext);
-    console.log(auth);
     return (
         <Route
             {...rest}
@@ -18,4 +17,4 @@ function PrivateRoute({ children, ...rest }: PrivateRouteProps) {
             }
         />
     );
-}
+};

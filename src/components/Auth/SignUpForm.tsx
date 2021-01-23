@@ -9,7 +9,7 @@ interface Error {
     error: string;
 }
 
-function SignUpForm(): JSX.Element {
+const SignUpForm: React.FC = () => {
     const [auth] = useMutation(AUTH_SIGNUP);
     const [username, setUsername] = useState('');
     const [fullname, setFullname] = useState('');
@@ -85,6 +85,6 @@ function SignUpForm(): JSX.Element {
             ))}
         </Form>
     );
-}
+};
 
 export default SignUpForm;

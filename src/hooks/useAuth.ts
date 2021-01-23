@@ -8,7 +8,14 @@ export interface IUser {
     fullname: string;
 }
 
-const useAuth = () => {
+export interface IAuth {
+    user: IUser | null;
+    authenticated: boolean;
+    authenticate: () => Promise<boolean> | undefined;
+    signOut: () => Promise<void> | undefined;
+}
+
+const useAuth = (): IAuth => {
     const [user, setUser] = useState<IUser | null>(null);
     const [authenticated, setAuthenticated] = useState<boolean>(false);
     const [auth] = useMutation(AUTHENTICATE_USER);
@@ -25,7 +32,6 @@ const useAuth = () => {
                     setUser(data.authenticateUser.user);
                 }
                 return true;
-                console.log('Authenticated');
             })
             .catch((e) => {
                 console.log(e);

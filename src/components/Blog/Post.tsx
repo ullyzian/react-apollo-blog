@@ -10,7 +10,7 @@ interface PostProps {
     id: number;
 }
 
-const Post: React.FC<PostProps> = ({ body, title, id }: PostProps) => {
+const Post: React.FC<PostProps> = ({ body, title, id }) => {
     return (
         <Card className="text-left my-4">
             <Card.Body>
@@ -26,13 +26,17 @@ const Post: React.FC<PostProps> = ({ body, title, id }: PostProps) => {
                         }}
                     >
                         {body}
-                        sdljfhskdjfhksdfjhksjdfjhsdgfjhsdgfjhsdgfjhsdgfjsdhfgsdjhfgjshdgfhsdgfjhgsdjhfgsjdhgfjhsdgfjhgsdfjhgsdjhfgsjdhgfjhsdgfjhsgdjfhgsdjhfgjshdgfjhsdgjhfgsdjhgfjshdgfjhgsdfjhgsdjhfgjhsdgfjhsdgfjhsdgfjhsdgfjhgsdjfhgsdjh
-                        gdjshfg sjdhfg jdhsg jfgsdjhfg sdhjgf
                     </div>
                 </Card.Text>
                 <Link to={`${ROUTES.blog}/${id}`}>
                     <Button variant="primary">View more</Button>
                 </Link>
+                <Button className="ml-2" variant="warning">
+                    Edit
+                </Button>
+                <Button className="ml-2" variant="danger">
+                    Delete
+                </Button>
             </Card.Body>
             <Card.Footer className="text-muted">Tags</Card.Footer>
         </Card>

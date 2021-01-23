@@ -3,7 +3,7 @@ import SignUpForm from '../components/Auth/SignUpForm';
 import Navigation from '../components/Navigation/Navigation';
 import { Col, Container, Row } from 'react-bootstrap';
 
-function SignUp(): JSX.Element {
+const SignUp: React.FC = () => {
     return (
         <>
             <Navigation />
@@ -17,6 +17,6 @@ function SignUp(): JSX.Element {
             </Container>
         </>
     );
-}
+};
 
 export default SignUp;
