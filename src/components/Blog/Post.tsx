@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '../../utils/constants';
 
 interface PostProps {
     body: string;
@@ -11,11 +12,11 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ body, title, id }: PostProps) => {
     return (
-        <Card className="text-left">
+        <Card className="text-left my-4">
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>
-                    <p
+                    <div
                         style={{
                             textOverflow: 'ellipsis',
                             overflow: 'hidden',
@@ -27,9 +28,9 @@ const Post: React.FC<PostProps> = ({ body, title, id }: PostProps) => {
                         {body}
                         sdljfhskdjfhksdfjhksjdfjhsdgfjhsdgfjhsdgfjhsdgfjsdhfgsdjhfgjshdgfhsdgfjhgsdjhfgsjdhgfjhsdgfjhgsdfjhgsdjhfgsjdhgfjhsdgfjhsgdjfhgsdjhfgjshdgfjhsdgjhfgsdjhgfjshdgfjhgsdfjhgsdjhfgjhsdgfjhsdgfjhsdgfjhsdgfjhgsdjfhgsdjh
                         gdjshfg sjdhfg jdhsg jfgsdjhfg sdhjgf
-                    </p>
+                    </div>
                 </Card.Text>
-                <Link to={`/blog/${id}`}>
+                <Link to={`${ROUTES.blog}/${id}`}>
                     <Button variant="primary">View more</Button>
                 </Link>
             </Card.Body>

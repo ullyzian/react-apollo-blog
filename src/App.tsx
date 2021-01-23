@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import { ApolloProvider } from '@apollo/client';
-import client from './apollo/client';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import BlogList from './pages/BlogList';
 import { ROUTES } from './utils/constants';
 import BlogPost from './pages/BlogPost';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import AuthContext from './contexts/AuthContext';
+import useAuth from './hooks/useAuth';
 
 function App(): JSX.Element {
+    const auth = useAuth();
+    useEffect(() => {
+        auth.authenticate();
+    }, []);
+
     return (
-        <ApolloProvider client={client}>
+        <AuthContext.Provider value={auth}>
             <Router>
                 <Route path={ROUTES.blog} exact>
                     <BlogList />
@@ -26,7 +31,7 @@ function App(): JSX.Element {
                     <SignUp />
                 </Route>
             </Router>
-        </ApolloProvider>
+        </AuthContext.Provider>
     );
 }
 

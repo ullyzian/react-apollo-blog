@@ -10,10 +10,10 @@ function BlogPost(): JSX.Element {
     const { id }: { id: string } = useParams();
     const { loading, error, data } = useQuery(GET_POST(Number(id)));
     if (loading) {
-        return <p>Loading</p>;
+        return <div>Loading</div>;
     }
     if (error) {
-        return <p>Error</p>;
+        return <div>Error</div>;
     }
     return (
         <>
@@ -25,10 +25,10 @@ function BlogPost(): JSX.Element {
                             <>
                                 <h1 className="text-left">{data.detailPost.title}</h1>
                                 <hr />
-                                <p>{data.detailPost.body}</p>
+                                <div>{data.detailPost.body}</div>
                             </>
                         ) : (
-                            <p>Not found</p>
+                            <div>Not found</div>
                         )}
                     </Col>
                     <Col className="my-5" xs={12} md={3}>

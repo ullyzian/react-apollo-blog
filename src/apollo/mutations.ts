@@ -37,3 +37,28 @@ export const AUTH_SIGNUP = gql`
         }
     }
 `;
+
+export const AUTHENTICATE_USER = gql`
+    mutation {
+        authenticateUser {
+            user {
+                id
+                username
+                fullname
+            }
+            success
+        }
+    }
+`;
+
+export const CREATE_POST = gql`
+    mutation CreatePost($title: String!, $body: String!) {
+        createPost(title: $title, body: $body) {
+            post {
+                id
+                title
+                body
+            }
+        }
+    }
+`;

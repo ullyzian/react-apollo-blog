@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { AUTH_SIGNIN } from '../../apollo/mutations';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
+import AuthContext from '../../contexts/AuthContext';
 
 function SignInForm(): JSX.Element {
     const [auth] = useMutation(AUTH_SIGNIN);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
+    const authUser = useContext(AuthContext);
+
     const history = useHistory();
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -19,6 +22,7 @@ function SignInForm(): JSX.Element {
             .then(({ data }) => {
                 if (data.signInUser.success) {
                     localStorage.setItem('access_token', data.signInUser.token);
+                    authUser.authenticate();
                     history.push(ROUTES.blog);
                 } else {
                     setErrors(data.signInUser.errors);
