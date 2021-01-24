@@ -24,9 +24,12 @@ const PostsList: React.FC<PostsListProps> = ({ data, loading, error, refetch }) 
     if (error) {
         return <div>Error</div>;
     }
-    return data.listPosts.map(({ body, title, id, authorId }: IPost) => {
-        return <PostCard key={id} body={body} title={title} id={id} authorId={authorId} refetch={refetch} />;
-    });
+    return data.listPosts
+        .slice(0)
+        .reverse()
+        .map(({ body, title, id, authorId }: IPost) => {
+            return <PostCard key={id} body={body} title={title} id={id} authorId={authorId} refetch={refetch} />;
+        });
 };
 
 export default PostsList;

@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from '../components/Navigation/Navigation';
 import { Col, Container, Row } from 'react-bootstrap';
 import PostsList from '../components/PostList/PostsList';
-import Sidebar from '../components/Sidebar/Sidebar';
+import Sidebar from '../components/PostList/Sidebar';
 import { useQuery } from '@apollo/client';
 import { GET_POSTS } from '../apollo/queries';
 

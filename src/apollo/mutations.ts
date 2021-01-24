@@ -76,3 +76,34 @@ export const UPDATE_POST = gql`
         }
     }
 `;
+
+export const CREATE_COMMENT = gql`
+    mutation CreateComment($body: String!, $postId: Int!) {
+        createComment(body: $body, postId: $postId) {
+            id
+            body
+        }
+    }
+`;
+
+export const DELETE_COMMENT = gql`
+    mutation DELETEComment($id: Int!) {
+        deleteComment(id: $id) {
+            comment {
+                id
+                body
+            }
+        }
+    }
+`;
+
+export const UPDATE_COMMENT = gql`
+    mutation UpdateComment($id: Int!, $body: String!) {
+        updateComment(id: $id, body: $body) {
+            comment {
+                id
+                body
+            }
+        }
+    }
+`;

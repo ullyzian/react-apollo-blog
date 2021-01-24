@@ -18,6 +18,13 @@ export const GET_POST = gql`
             title
             body
             authorId
+            comments {
+                id
+                body
+                author {
+                    fullname
+                }
+            }
         }
     }
 `;
