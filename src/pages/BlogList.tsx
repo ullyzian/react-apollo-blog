@@ -8,6 +8,7 @@ import { GET_POSTS } from '../apollo/queries';
 
 const BlogList: React.FC = () => {
     const { loading, error, data, refetch } = useQuery(GET_POSTS);
+    // comment
 
     return (
         <>
