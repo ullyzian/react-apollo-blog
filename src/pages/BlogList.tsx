@@ -5,10 +5,10 @@ import PostsList from '../components/PostList/PostsList';
 import Sidebar from '../components/PostList/Sidebar';
 import { useQuery } from '@apollo/client';
 import { GET_POSTS } from '../apollo/queries';
+import { NotificationsList } from '../components/Notification/NotificationsList';
 
 const BlogList: React.FC = () => {
     const { loading, error, data, refetch } = useQuery(GET_POSTS);
-    // comment
 
     return (
         <>
@@ -25,6 +25,7 @@ const BlogList: React.FC = () => {
                     </Col>
                 </Row>
             </Container>
+            <NotificationsList />
         </>
     );
 };

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ApolloError, ApolloQueryResult } from '@apollo/client';
 import PostCard from './PostCard';
+import MessagesContext from '../../contexts/MessagesContext';
 
 export interface IPost {
     id: number;
@@ -18,10 +19,13 @@ export interface PostsListProps {
 }
 
 const PostsList: React.FC<PostsListProps> = ({ data, loading, error, refetch }) => {
+    const { addMessage } = useContext(MessagesContext);
+
     if (loading) {
         return <div>Loading</div>;
     }
     if (error) {
+        addMessage('Unexpected error. Please visit site later.', 'Error', 'red');
         return <div>Error</div>;
     }
     return data.listPosts

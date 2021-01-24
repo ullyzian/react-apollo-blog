@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { ApolloQueryResult, useMutation } from '@apollo/client';
 import { CREATE_POST } from '../../apollo/mutations';
+import MessagesContext from '../../contexts/MessagesContext';
 
 interface CreatePostModalProps {
     show: boolean;
@@ -10,6 +11,7 @@ interface CreatePostModalProps {
 }
 
 const CreatePostModal: React.FC<CreatePostModalProps> = ({ show, handleClose, refetch }) => {
+    const { addMessage } = useContext(MessagesContext);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [createPost] = useMutation(CREATE_POST);
@@ -18,10 +20,11 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({ show, handleClose, re
         e.preventDefault();
         createPost({ variables: { title: title, body: body } })
             .then(() => {
-                refetch();
+                refetch().then(() => addMessage('Post created', 'Success', 'lightgreen'));
                 handleClose();
             })
             .catch((e) => {
+                addMessage('Error, while creating post', 'Error', 'red');
                 console.log(e);
             });
     };

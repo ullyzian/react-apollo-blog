@@ -5,17 +5,11 @@ import { Comment, IComment } from './Comment';
 export interface CommentsListProps {
     data: any;
     refetch: () => Promise<ApolloQueryResult<any>>;
-    loading: boolean;
-    error: ApolloError | undefined;
+    loading?: boolean;
+    error?: ApolloError | undefined;
 }
 
-export const CommentsList: React.FC<CommentsListProps> = ({ loading, error, data }) => {
-    if (loading) {
-        return <div>Loading</div>;
-    }
-    if (error) {
-        return <div>Error</div>;
-    }
+export const CommentsList: React.FC<CommentsListProps> = ({ data }) => {
     return data
         .slice(0)
         .reverse()

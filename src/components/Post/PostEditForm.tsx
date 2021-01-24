@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { ApolloQueryResult, useMutation } from '@apollo/client';
 import { UPDATE_POST } from '../../apollo/mutations';
+import MessagesContext from '../../contexts/MessagesContext';
 
 interface Props {
     id: number;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const PostEditForm: React.FC<Props> = ({ id, refetch, setEditMode, oldBody, oldTitle }) => {
+    const { addMessage } = useContext(MessagesContext);
     const [title, setTitle] = useState(oldTitle);
     const [body, setBody] = useState(oldBody);
     const [updatePost] = useMutation(UPDATE_POST);
@@ -22,9 +24,10 @@ export const PostEditForm: React.FC<Props> = ({ id, refetch, setEditMode, oldBod
         updatePost({ variables: { id: id, title: title, body: body } })
             .then(() => {
                 setEditMode(false);
-                refetch();
+                refetch().then(() => addMessage('Post successfully edited', 'Success', 'lightgreen'));
             })
             .catch((e) => {
+                addMessage('Error, while editing post', 'Error', 'red');
                 console.log(e);
             });
     };

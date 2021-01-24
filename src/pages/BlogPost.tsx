@@ -15,6 +15,7 @@ const BlogPost: React.FC = () => {
     const { id }: { id: string } = useParams();
     const { loading, error, data, refetch } = useQuery(GET_POST, { variables: { id: Number(id) } });
     const [editMode, setEditMode] = useState(false);
+
     if (loading) return <div>Loading</div>;
     if (error) return <div>Error</div>;
 

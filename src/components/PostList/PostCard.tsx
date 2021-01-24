@@ -6,18 +6,23 @@ import AuthContext from '../../contexts/AuthContext';
 import { useMutation } from '@apollo/client';
 import { DELETE_POST } from '../../apollo/mutations';
 import { IPost } from './PostsList';
+import MessagesContext from '../../contexts/MessagesContext';
 
 const PostCard: React.FC<IPost> = ({ body, title, id, authorId, refetch }) => {
     const auth = useContext(AuthContext);
+    const { addMessage } = useContext(MessagesContext);
+
     const [deletePost] = useMutation(DELETE_POST);
 
     const handleDelete = () => {
         deletePost({ variables: { id: id } })
             .then(() => {
-                console.log('Success');
-                refetch();
+                refetch().then(() => addMessage('Post successfully deleted', 'Success', 'lightgreen'));
             })
-            .catch((e) => console.log(e));
+            .catch((e) => {
+                addMessage('Unexpected error. Please visit site later.', 'Error', 'red');
+                console.log(e);
+            });
     };
 
     return (

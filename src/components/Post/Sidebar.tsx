@@ -5,6 +5,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 import { ApolloQueryResult } from '@apollo/client';
+import MessagesContext from '../../contexts/MessagesContext';
 
 interface Props {
     refetch: () => Promise<ApolloQueryResult<any>>;
@@ -15,6 +16,8 @@ interface Props {
 
 const Sidebar: React.FC<Props> = ({ refetch, editMode, setEditMode, authorId }) => {
     const [show, setShow] = useState(false);
+    const { addMessage } = useContext(MessagesContext);
+
     const auth = useContext(AuthContext);
     const history = useHistory();
 
@@ -24,6 +27,7 @@ const Sidebar: React.FC<Props> = ({ refetch, editMode, setEditMode, authorId }) 
             if (is_auth) {
                 setShow(!show);
             } else {
+                addMessage('Not authenticated to create post', 'Error', 'red');
                 history.push(ROUTES.signIn);
             }
         });

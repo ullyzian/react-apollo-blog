@@ -1,9 +1,10 @@
 // @flow
 import * as React from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { ApolloQueryResult, useMutation } from '@apollo/client';
 import { CREATE_COMMENT } from '../../apollo/mutations';
+import MessagesContext from '../../contexts/MessagesContext';
 
 interface Props {
     postId: number;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export const CommentForm: React.FC<Props> = ({ postId, refetch }) => {
+    const { addMessage } = useContext(MessagesContext);
     const [body, setBody] = useState('');
     const [createComment] = useMutation(CREATE_COMMENT);
 
@@ -18,9 +20,12 @@ export const CommentForm: React.FC<Props> = ({ postId, refetch }) => {
         e.preventDefault();
         createComment({ variables: { postId: postId, body: body } })
             .then(() => {
-                refetch();
+                refetch().then(() => addMessage('You successfully commented', 'Success', 'lightgreen'));
             })
-            .catch((e) => console.log(e));
+            .catch((e) => {
+                addMessage('Error, while adding comment', 'Error', 'red');
+                console.log(e);
+            });
     };
 
     return (
