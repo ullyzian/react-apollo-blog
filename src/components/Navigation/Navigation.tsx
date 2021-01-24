@@ -9,6 +9,7 @@ const Navigation: React.FC = () => {
     const handleSignOut = () => {
         auth.signOut();
         auth.authenticate();
+        window.location.reload(false);
     };
 
     return (

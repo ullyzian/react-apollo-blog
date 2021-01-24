@@ -6,6 +6,7 @@ export const GET_POSTS = gql`
             id
             title
             body
+            authorId
         }
     }
 `;
@@ -16,6 +17,7 @@ export const GET_POST = gql`
             id
             title
             body
+            authorId
         }
     }
 `;

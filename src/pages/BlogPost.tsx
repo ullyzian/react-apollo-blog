@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '../components/Navigation/Navigation';
 import { Col, Container, Row } from 'react-bootstrap';
-import Sidebar from '../components/Blog/Sidebar';
+import Sidebar from '../components/Sidebar/Sidebar';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_POST } from '../apollo/queries';
+import { Post } from '../components/Post/Post';
+import { NotFound } from '../components/Post/NotFound';
+import { PostEditForm } from '../components/Post/PostEditForm';
 
 const BlogPost: React.FC = () => {
     const { id }: { id: string } = useParams();
-    const { loading, error, data } = useQuery(GET_POST, { variables: { id: Number(id) } });
+    const { loading, error, data, refetch } = useQuery(GET_POST, { variables: { id: Number(id) } });
+    const [editMode, setEditMode] = useState(false);
     if (loading) return <div>Loading</div>;
     if (error) return <div>Error</div>;
 
@@ -19,17 +23,29 @@ const BlogPost: React.FC = () => {
                 <Row>
                     <Col className="my-2" xs={12} md={9}>
                         {data.detailPost ? (
-                            <>
-                                <h1 className="text-left">{data.detailPost.title}</h1>
-                                <hr />
-                                <div>{data.detailPost.body}</div>
-                            </>
+                            editMode ? (
+                                <PostEditForm
+                                    id={Number(id)}
+                                    refetch={refetch}
+                                    setEditMode={setEditMode}
+                                    oldTitle={data.detailPost.title}
+                                    oldBody={data.detailPost.body}
+                                />
+                            ) : (
+                                <Post title={data.detailPost.title} body={data.detailPost.body} />
+                            )
                         ) : (
-                            <div>Not found</div>
+                            <NotFound />
                         )}
                     </Col>
                     <Col className="my-5" xs={12} md={3}>
-                        <Sidebar />
+                        <Sidebar
+                            authorId={data.detailPost.authorId}
+                            refetch={refetch}
+                            editMode={editMode}
+                            canEdit={true}
+                            setEditMode={setEditMode}
+                        />
                     </Col>
                 </Row>
             </Container>

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { useMutation } from '@apollo/client';
+import { ApolloQueryResult, useMutation } from '@apollo/client';
 import { CREATE_POST } from '../../apollo/mutations';
 
 interface CreatePostModalProps {
     show: boolean;
     handleClose: () => void;
+    refetch: () => Promise<ApolloQueryResult<any>>;
 }
 
-const CreatePostModal: React.FC<CreatePostModalProps> = ({ show, handleClose }) => {
+const CreatePostModal: React.FC<CreatePostModalProps> = ({ show, handleClose, refetch }) => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [createPost] = useMutation(CREATE_POST);
@@ -16,8 +17,8 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({ show, handleClose }) 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         createPost({ variables: { title: title, body: body } })
-            .then(({ data }) => {
-                console.log(data);
+            .then(() => {
+                refetch();
                 handleClose();
             })
             .catch((e) => {

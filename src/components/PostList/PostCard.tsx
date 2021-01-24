@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
+import AuthContext from '../../contexts/AuthContext';
+import { useMutation } from '@apollo/client';
+import { DELETE_POST } from '../../apollo/mutations';
+import { IPost } from './PostsList';
 
-interface PostProps {
-    body: string;
-    title: string;
-    key: number;
-    id: number;
-}
+const PostCard: React.FC<IPost> = ({ body, title, id, authorId, refetch }) => {
+    const auth = useContext(AuthContext);
+    const [deletePost] = useMutation(DELETE_POST);
 
-const Post: React.FC<PostProps> = ({ body, title, id }) => {
+    const handleDelete = () => {
+        deletePost({ variables: { id: id } })
+            .then(() => {
+                console.log('Success');
+                refetch();
+            })
+            .catch((e) => console.log(e));
+    };
+
     return (
         <Card className="text-left my-4">
             <Card.Body>
@@ -31,16 +40,15 @@ const Post: React.FC<PostProps> = ({ body, title, id }) => {
                 <Link to={`${ROUTES.blog}/${id}`}>
                     <Button variant="primary">View more</Button>
                 </Link>
-                <Button className="ml-2" variant="warning">
-                    Edit
-                </Button>
-                <Button className="ml-2" variant="danger">
-                    Delete
-                </Button>
+                {Number(auth.user?.id) === authorId ? (
+                    <Button onClick={handleDelete} className="ml-2" variant="danger">
+                        Delete
+                    </Button>
+                ) : null}
             </Card.Body>
             <Card.Footer className="text-muted">Tags</Card.Footer>
         </Card>
     );
 };
 
-export default Post;
+export default PostCard;

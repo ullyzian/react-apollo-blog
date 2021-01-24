@@ -50,3 +50,29 @@ export const CREATE_POST = gql`
         }
     }
 `;
+
+export const DELETE_POST = gql`
+    mutation DeletePost($id: Int!) {
+        deletePost(id: $id) {
+            post {
+                id
+                title
+                body
+            }
+            errors
+        }
+    }
+`;
+
+export const UPDATE_POST = gql`
+    mutation UpdatePost($id: Int!, $title: String, $body: String) {
+        updatePost(id: $id, title: $title, body: $body) {
+            post {
+                id
+                title
+                body
+            }
+            errors
+        }
+    }
+`;
