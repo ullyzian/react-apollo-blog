@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { ApolloQueryResult, useMutation } from '@apollo/client';
 import { CREATE_COMMENT } from '../../apollo/mutations';
 

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Card, Button } from 'react-bootstrap';
-import { ApolloQueryResult } from '@apollo/client';
+import { Card } from 'react-bootstrap';
 
 interface Author {
     fullname: string;
