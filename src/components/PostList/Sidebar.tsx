@@ -20,7 +20,7 @@ const Sidebar: React.FC<Props> = ({ refetch }) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => {
-        auth.authenticate()?.then((is_auth) => {
+        auth.authenticate().then((is_auth) => {
             if (is_auth) {
                 setShow(!show);
             } else {

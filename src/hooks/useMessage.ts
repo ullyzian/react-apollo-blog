@@ -11,7 +11,7 @@ const useMessage = (): IMessage => {
     const [messages, setMessages] = useState<INotification[]>([]);
 
     const addMessage = (message: string, status: string, color: string) => {
-        setMessages([...messages, { id: Math.floor(Math.random() * 101), message, status, color }]);
+        setMessages([{ id: Math.floor(Math.random() * 101), message, status, color }]);
     };
 
     const removeMessage = (id: number) => {

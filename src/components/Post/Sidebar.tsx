@@ -18,12 +18,12 @@ const Sidebar: React.FC<Props> = ({ refetch, editMode, setEditMode, authorId }) 
     const [show, setShow] = useState(false);
     const { addMessage } = useContext(MessagesContext);
 
-    const auth = useContext(AuthContext);
+    const { authenticate, user } = useContext(AuthContext);
     const history = useHistory();
 
     const handleClose = () => setShow(false);
     const handleShow = () => {
-        auth.authenticate()?.then((is_auth) => {
+        authenticate()?.then((is_auth) => {
             if (is_auth) {
                 setShow(!show);
             } else {
@@ -39,7 +39,7 @@ const Sidebar: React.FC<Props> = ({ refetch, editMode, setEditMode, authorId }) 
                 Create new post
             </ListGroup.Item>
             <CreatePostModal show={show} handleClose={handleClose} refetch={refetch} />
-            {Number(auth.user?.id) === authorId ? (
+            {Number(user?.id) === authorId ? (
                 <>
                     <ListGroup.Item onClick={() => setEditMode(!editMode)} action>
                         Edit post

@@ -11,7 +11,7 @@ export interface IUser {
 export interface IAuth {
     user: IUser | null;
     authenticated: boolean;
-    authenticate: () => Promise<boolean> | undefined;
+    authenticate: () => Promise<boolean>;
     signOut: () => Promise<void> | undefined;
 }
 
@@ -23,7 +23,7 @@ const useAuth = (): IAuth => {
     const authenticate = () => {
         const token = localStorage.getItem('access_token');
         if (!token) {
-            return;
+            return Promise.resolve().then(() => false);
         }
         return auth()
             .then(({ data }) => {

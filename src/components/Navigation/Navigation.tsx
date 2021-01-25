@@ -14,7 +14,7 @@ const Navigation: React.FC = () => {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" className="px-5">
                 <Navbar.Brand href={ROUTES.home}>React + Apollo blog</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Nav.Link href={ROUTES.blog}>Blog</Nav.Link>
@@ -25,17 +25,21 @@ const Navigation: React.FC = () => {
                             <Nav.Item className="text-white my-auto">
                                 <div style={{ fontSize: 14 }}>Hello, {auth.user?.fullname}</div>
                             </Nav.Item>
-                            <Button className="ml-2" onClick={handleSignOut} size="sm">
+                            <Button className="ml-2 px-2" onClick={handleSignOut} size="sm">
                                 Sign out
                             </Button>
                         </>
                     ) : (
                         <>
                             <Nav.Link href={ROUTES.signIn}>
-                                <Button size="sm">Sign In</Button>
+                                <Button size="sm" className="px-3">
+                                    Sign In
+                                </Button>
                             </Nav.Link>
                             <Nav.Link href={ROUTES.signUp}>
-                                <Button size="sm">Sign Up</Button>
+                                <Button size="sm" className="px-3">
+                                    Sign Up
+                                </Button>
                             </Nav.Link>
                         </>
                     )}

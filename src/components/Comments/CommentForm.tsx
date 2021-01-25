@@ -23,7 +23,7 @@ export const CommentForm: React.FC<Props> = ({ postId, refetch }) => {
                 refetch().then(() => addMessage('You successfully commented', 'Success', 'lightgreen'));
             })
             .catch((e) => {
-                addMessage('Error, while adding comment', 'Error', 'red');
+                addMessage('Not authenticated to add comments', 'Error', 'red');
                 console.log(e);
             });
     };

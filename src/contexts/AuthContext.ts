@@ -5,7 +5,7 @@ const initialValues: IAuth = {
     authenticated: false,
     user: null,
     signOut: () => undefined,
-    authenticate: () => undefined,
+    authenticate: () => Promise.resolve().then(() => false),
 };
 
 const AuthContext = React.createContext(initialValues);
